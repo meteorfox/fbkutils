@@ -1,5 +1,5 @@
 - benchmark: schbench
-  name: schbench default 
+  name: schbench default
   description: defaults for schbench
   args:
     message-threads: 2
@@ -71,4 +71,11 @@
     num-threads: 1
     scale-factor: 1
     runtime: 1
-
+- benchmark: nginx_wrk_bench
+  name: nginx_wrk_bench default
+  description: defaults for nginx_wrk_bench
+  args:
+    - '-c400'  # Connections
+    - '-d30s'  # Duration
+    - '-t32'   # Threads
+    - 'http://127.0.0.1:8080/index.html'
