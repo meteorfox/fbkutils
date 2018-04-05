@@ -26,3 +26,8 @@ silo:
     - latency:
         - avg_latency
 
+nginx_wrk_bench:
+  parser: nginx_wrk_bench
+  path: ./benchmarks/nginx_wrk_bench.sh
+  metrics:
+    - 'Requests/sec'
