@@ -1,0 +1,27 @@
+# Example Jobs file to show toplev hook options
+- benchmark: silo
+  name: silo default
+  description: defaults for silo
+  args:
+    verbose: true
+    bench: tpcc
+    num-threads: 1
+    scale-factor: 1
+    runtime: 1
+  hooks:
+    - hook: toplev
+      options:
+        binary_path: 'pmu-tools/toplev.py'  # Optional
+        args:  # Optional
+          - '-l2'
+          - '-I100'
+          - '--summary'
+          - '-m'
+          - '--no-desc'
+          - '-x,'
+          - '-D 5000'
+          - '-o silo_toplev_l1.csv'
+        background_mode: # Optional
+          duration: '60'
+          stdout_path: 'silo_toplev_stdout.log'
+          stderr_path: 'silo_toplev_stderr.log'
