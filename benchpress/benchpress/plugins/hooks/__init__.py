@@ -9,9 +9,11 @@
 from .cpu_limit import CpuLimit
 from .file import FileHook
 from .shell import ShellHook
+from .toplev import Toplev
 
 
 def register_hooks(factory):
     factory.register('cpu-limit', CpuLimit)
     factory.register('file', FileHook)
     factory.register('shell', ShellHook)
+    factory.register('toplev', Toplev)

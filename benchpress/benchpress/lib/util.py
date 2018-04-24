@@ -6,8 +6,22 @@
 # LICENSE file in the root directory of this source tree. An additional grant
 # of patent rights can be found in the PATENTS file in the same directory.
 
+import subprocess
 import sys
 
 
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
+
+
+def issue_background_command(cmd, stdout_path, stderr_path, env=None):
+    stdout = open(stdout_path, 'w', encoding='utf-8')
+    stderr = open(stderr_path, 'w', encoding='utf-8')
+    subprocess.Popen(
+        cmd,
+        shell=False,
+        env=env,
+        stdout=stdout,
+        stderr=stderr,
+        close_fds=True
+    )
