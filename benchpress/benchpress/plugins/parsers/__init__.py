@@ -10,6 +10,9 @@ from .fio import FioParser
 from .generic import JSONParser
 from .ltp import LtpParser
 from .nginx_wrk_bench import NginxWrkParser
+from .minebench import KMeansParser
+from .minebench import PLSAParser
+from .minebench import RSearchParser
 from .returncode import ReturncodeParser
 from .schbench import SchbenchParser
 from .silo import SiloParser
@@ -20,6 +23,9 @@ def register_parsers(factory):
     factory.register('json', JSONParser)
     factory.register('ltp', LtpParser)
     factory.register('nginx_wrk_bench', NginxWrkParser)
+    factory.register('minebench_kmeans', KMeansParser)
+    factory.register('minebench_plsa', PLSAParser)
+    factory.register('minebench_rsearch', RSearchParser)
     factory.register('returncode', ReturncodeParser)
     factory.register('schbench', SchbenchParser)
     factory.register('silo', SiloParser)
