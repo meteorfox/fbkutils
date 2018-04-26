@@ -26,6 +26,8 @@ for dataset in $NU_MINEBENCH_DATASETS; do
 done
 cd "${BENCHMARKS_DIR}/.."
 
+cp templates/time_wrap.sh "${BENCHMARKS_DIR}/minebench/"
+chmod u+x "${BENCHMARKS_DIR}/minebench/time_wrap.sh"
 
 rm -rf build
 mkdir -p build
@@ -54,7 +56,7 @@ echo 'Done installing PLSA'
 echo 'Compiling and Installing RSearch'
 cd 'RSEARCH/'
 ./configure --prefix="${BENCHMARKS_DIR}/minebench/rsearch"
-make CFLAGS="-O3"
+make CFLAGS="-O3 -fopenmp"
 make install
 cd ../
 echo 'Done installing RSearch'
