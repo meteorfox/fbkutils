@@ -97,7 +97,12 @@ class Job(object):
 
         try:
             logger.info('Starting "{}"'.format(self.name))
-            cmd = [self.binary] + self.args
+            safe_args = []
+            for arg in self.args:
+                for sub_arg in arg.split(' '):
+                    safe_args.append(sub_arg)
+
+            cmd = [self.binary] + safe_args
             process = subprocess.Popen(cmd,
                                        stdout=subprocess.PIPE,
                                        stderr=subprocess.PIPE)
