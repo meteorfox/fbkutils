@@ -1,0 +1,14 @@
+Parellel Smith Waterman Algorithm implementation for OpenMP
+Threads Number=2
+The file 'benchmarks/minebench/datasets/PLSA/pam120.bla' was opened
+The file 'benchmarks/minebench/datasets/PLSA/30k_1.txt' was opened
+The file 'benchmarks/minebench/datasets/PLSA/30k_2.txt' was opened
+Seqence(1) Length=30144, Sequence Length(2)=29696
+ Adjust block height=17, block width=17
+score=101948  x=29567 y=29696 globalstart.i=3 globalstart.j=130
+Forward time: 29.22s
+BackwardFindPathsForHugeBlock Time: 8.35
+Second phase in backward period Time: 6.12
+
+Success!
+Total time: 43.69s

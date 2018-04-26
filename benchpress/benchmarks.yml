@@ -26,3 +26,25 @@ silo:
     - latency:
         - avg_latency
 
+minebench_kmeans:
+  parser: minebench_kmeans
+  path: ./benchmarks/minebench/time_wrap.sh
+  metrics:
+    - execution_time:
+      - real
+      - user
+      - sys
+
+minebench_plsa:
+  parser: minebench_plsa
+  path: ./benchmarks/minebench/plsa
+  metrics:
+    - execution_time:
+      - total_time
+
+minebench_rsearch:
+  parser: minebench_rsearch
+  path: ./benchmarks/minebench/rsearch/bin/rsearch
+  metrics:
+    - execution_time:
+      - total_time

@@ -1,0 +1,121 @@
+Random seed: 1524699649
+D scale of 2.0
+Matrix: RIBOSUM85-60
+Alpha: 10.00
+Beta: 5.00
+Alpha': 0.00
+Beta': 15.00
+Query file: benchmarks/minebench/datasets/rsearch/Queries/mir-40.stk
+Database file: benchmarks/minebench/datasets/rsearch/Databasefile/100Kdb.fa
+
+
+beginsc = 0.000000
+endsc = -15.000000
+Making histogram cost 24.8 seconds
+Statistics calculated with simulation of 100 samples of length 388
+No partition points
+GC = 0	lambda = 0.0000	mu = inf
+GC = 1	lambda = 0.0000	mu = inf
+GC = 2	lambda = 0.0000	mu = inf
+GC = 3	lambda = 0.0000	mu = inf
+GC = 4	lambda = 0.0000	mu = inf
+GC = 5	lambda = 0.0000	mu = inf
+GC = 6	lambda = 0.0000	mu = inf
+GC = 7	lambda = 0.0000	mu = inf
+GC = 8	lambda = 0.0000	mu = inf
+GC = 9	lambda = 0.0000	mu = inf
+GC = 10	lambda = 0.0000	mu = inf
+GC = 11	lambda = 0.0000	mu = inf
+GC = 12	lambda = 0.0000	mu = inf
+GC = 13	lambda = 0.0000	mu = inf
+GC = 14	lambda = 0.0000	mu = inf
+GC = 15	lambda = 0.0000	mu = inf
+GC = 16	lambda = 0.0000	mu = inf
+GC = 17	lambda = 0.0000	mu = inf
+GC = 18	lambda = 0.0000	mu = inf
+GC = 19	lambda = 0.0000	mu = inf
+GC = 20	lambda = 0.0000	mu = inf
+GC = 21	lambda = 0.0000	mu = inf
+GC = 22	lambda = 0.0000	mu = inf
+GC = 23	lambda = 0.0000	mu = inf
+GC = 24	lambda = 0.0000	mu = inf
+GC = 25	lambda = 0.0000	mu = inf
+GC = 26	lambda = 0.0000	mu = inf
+GC = 27	lambda = 0.0000	mu = inf
+GC = 28	lambda = 0.0000	mu = inf
+GC = 29	lambda = 0.0000	mu = inf
+GC = 30	lambda = 0.0000	mu = inf
+GC = 31	lambda = 0.0000	mu = inf
+GC = 32	lambda = 0.0000	mu = inf
+GC = 33	lambda = 0.0000	mu = inf
+GC = 34	lambda = 0.0000	mu = inf
+GC = 35	lambda = 0.0000	mu = inf
+GC = 36	lambda = 0.0000	mu = inf
+GC = 37	lambda = 0.0000	mu = inf
+GC = 38	lambda = 0.0000	mu = inf
+GC = 39	lambda = 0.0000	mu = inf
+GC = 40	lambda = 0.0000	mu = inf
+GC = 41	lambda = 0.0000	mu = inf
+GC = 42	lambda = 0.0000	mu = inf
+GC = 43	lambda = 0.0000	mu = inf
+GC = 44	lambda = 0.0000	mu = inf
+GC = 45	lambda = 0.0000	mu = inf
+GC = 46	lambda = 0.0000	mu = inf
+GC = 47	lambda = 0.0000	mu = inf
+GC = 48	lambda = 0.0000	mu = inf
+GC = 49	lambda = 0.0000	mu = inf
+GC = 50	lambda = 0.0000	mu = inf
+GC = 51	lambda = 0.0000	mu = inf
+GC = 52	lambda = 0.0000	mu = inf
+GC = 53	lambda = 0.0000	mu = inf
+GC = 54	lambda = 0.0000	mu = inf
+GC = 55	lambda = 0.0000	mu = inf
+GC = 56	lambda = 0.0000	mu = inf
+GC = 57	lambda = 0.0000	mu = inf
+GC = 58	lambda = 0.0000	mu = inf
+GC = 59	lambda = 0.0000	mu = inf
+GC = 60	lambda = 0.0000	mu = inf
+GC = 61	lambda = 0.0000	mu = inf
+GC = 62	lambda = 0.0000	mu = inf
+GC = 63	lambda = 0.0000	mu = inf
+GC = 64	lambda = 0.0000	mu = inf
+GC = 65	lambda = 0.0000	mu = inf
+GC = 66	lambda = 0.0000	mu = inf
+GC = 67	lambda = 0.0000	mu = inf
+GC = 68	lambda = 0.0000	mu = inf
+GC = 69	lambda = 0.0000	mu = inf
+GC = 70	lambda = 0.0000	mu = inf
+GC = 71	lambda = 0.0000	mu = inf
+GC = 72	lambda = 0.0000	mu = inf
+GC = 73	lambda = 0.0000	mu = inf
+GC = 74	lambda = 0.0000	mu = inf
+GC = 75	lambda = 0.0000	mu = inf
+GC = 76	lambda = 0.0000	mu = inf
+GC = 77	lambda = 0.0000	mu = inf
+GC = 78	lambda = 0.0000	mu = inf
+GC = 79	lambda = 0.0000	mu = inf
+GC = 80	lambda = 0.0000	mu = inf
+GC = 81	lambda = 0.0000	mu = inf
+GC = 82	lambda = 0.0000	mu = inf
+GC = 83	lambda = 0.0000	mu = inf
+GC = 84	lambda = 0.0000	mu = inf
+GC = 85	lambda = 0.0000	mu = inf
+GC = 86	lambda = 0.0000	mu = inf
+GC = 87	lambda = 0.0000	mu = inf
+GC = 88	lambda = 0.0000	mu = inf
+GC = 89	lambda = 0.0000	mu = inf
+GC = 90	lambda = 0.0000	mu = inf
+GC = 91	lambda = 0.0000	mu = inf
+GC = 92	lambda = 0.0000	mu = inf
+GC = 93	lambda = 0.0000	mu = inf
+GC = 94	lambda = 0.0000	mu = inf
+GC = 95	lambda = 0.0000	mu = inf
+GC = 96	lambda = 0.0000	mu = inf
+GC = 97	lambda = 0.0000	mu = inf
+GC = 98	lambda = 0.0000	mu = inf
+GC = 99	lambda = 0.0000	mu = inf
+GC = 100	lambda = 0.0000	mu = inf
+N = 235320
+Using E cutoff of 10.00
+we cost 225.7 seconds totally, 24.8 for making histogram
+Fin

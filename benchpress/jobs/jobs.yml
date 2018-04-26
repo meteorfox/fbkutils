@@ -1,5 +1,5 @@
 - benchmark: schbench
-  name: schbench default 
+  name: schbench default
   description: defaults for schbench
   args:
     message-threads: 2
@@ -72,3 +72,40 @@
     scale-factor: 1
     runtime: 1
 
+- benchmark: minebench_kmeans
+  name: minebench_kmeans default
+  description: defaults for minebench_kmeans
+  args:
+    - 'benchmarks/minebench/kmeans'
+    - '-b'  # binary input
+    - '-o'  # output time
+    - '-p 32'  # threads to use
+    - '-m 50'  # max number of clusters
+    - '-n 4'   # min number of clusters
+    - '-f'     # fuzzy kmeans
+    - '-i benchmarks/minebench/datasets/kmeans/edge'  # dataset to cluster
+
+- benchmark: minebench_plsa
+  name: minebench_plsa default
+  description: defaults for minebench_plsa
+  args:
+    - 'benchmarks/minebench/datasets/PLSA/30k_1.txt'
+    - 'benchmarks/minebench/datasets/PLSA/30k_2.txt'
+    - 'benchmarks/minebench/datasets/PLSA/pam120.bla'
+    - '600'
+    - '400'
+    - '3'
+    - '3'
+    - '1'
+    - '32'
+
+- benchmark: minebench_rsearch
+  name: minebench_rsearch default
+  description: defaults for minebench_rsearch
+  args:
+    - '-n 100000'
+    - '-c'
+    - '-E 100'
+    - '-m benchmarks/minebench/datasets/rsearch/matrices/RIBOSUM85-60.mat'
+    - 'benchmarks/minebench/datasets/rsearch/Queries/mir-40.stk'
+    - 'benchmarks/minebench/datasets/rsearch/Databasefile/100Kdb.fa'
