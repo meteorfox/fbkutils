@@ -17,6 +17,14 @@ ZLIB_DOWNLOAD_URL="http://zlib.net/${ZLIB_TAR_FILE}"
 BENCHMARKS_DIR="$(pwd)/benchmarks"
 mkdir -p "$BENCHMARKS_DIR"
 
+NGINX_INSTALLATION_PREFIX="${BENCHMARKS_DIR}/nginx"
+NGINX_BINARY_PATH="${NGINX_INSTALLATION_PREFIX}/sbin/nginx"
+
+if [[ -f "$NGINX_BINARY_PATH" && -x "$NGINX_BINARY_PATH" ]]; then
+  echo "NGINX already insalled into ${NGINX_INSTALLATION_PREFIX}"
+  exit 0
+fi
+
 rm -rf build
 mkdir -p build
 cd build
@@ -47,7 +55,7 @@ tar -xzvf "$NGINX_TAR_FILE"
 
 cd "$NGINX_VERSION"
 ./configure \
-    --prefix="${BENCHMARKS_DIR}/nginx" \
+    --prefix="${NGINX_INSTALLATION_PREFIX}" \
     --with-pcre="../${PCRE_VERSION}" \
     --with-zlib="../${ZLIB_VERSION}" \
     --with-http_ssl_module
