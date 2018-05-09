@@ -1,0 +1,26 @@
+From c9931b744b80b055c3702efc87942e3798f76d39 Mon Sep 17 00:00:00 2001
+From: Carlos L. Torres <cltorres@fb.com>
+Date: Wed, 2 May 2018 22:30:16 +0000
+Subject: [PATCH 2/2] Disable check for root user
+
+---
+ base/SystemChecks.php | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/base/SystemChecks.php b/base/SystemChecks.php
+index 1ae811f..c81ac6d 100644
+--- a/base/SystemChecks.php
++++ b/base/SystemChecks.php
+@@ -2,7 +2,8 @@
+ 
+ class SystemChecks {
+   public static function CheckAll(PerfOptions $options): void {
+-    self::CheckNotRoot();
++    # Don't check user
++    # self::CheckNotRoot();
+     self::CheckPortAvailability();
+     self::CheckCPUFreq();
+     self::CheckTCPTimeWaitReuse();
+-- 
+1.8.3.1
+

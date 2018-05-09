@@ -1,0 +1,76 @@
+From 047ec128ebe28bb5e267ecc971af8e7f397581c4 Mon Sep 17 00:00:00 2001
+From: Carlos L. Torres <ctlorres@fb.com>
+Date: Wed, 2 May 2018 22:26:57 +0000
+Subject: [PATCH 1/2] Add options to override siege benchmark duration and
+ timeout
+
+---
+ base/PerfOptions.php | 15 +++++++++++++++
+ base/Siege.php       |  4 ++--
+ 2 files changed, 17 insertions(+), 2 deletions(-)
+
+diff --git a/base/PerfOptions.php b/base/PerfOptions.php
+index a0247cc..4faf1c5 100644
+--- a/base/PerfOptions.php
++++ b/base/PerfOptions.php
+@@ -130,6 +130,10 @@ final class PerfOptions {
+   public ?string $remoteSiege;
+   public ?string $siegeTmpDir;
+ 
++  // Siege specific options
++  public string $siege_duration = '1M';
++  public string $siege_timeout = '5m';
++
+   public function __construct(Vector<string> $argv) {
+     $def = Vector {
+       'help',
+@@ -192,6 +196,8 @@ final class PerfOptions {
+       'server-threads:',
+       'client-threads:',
+       'remote-siege:',
++      'siege-duration:',
++      'siege-timeout:',
+     };
+     $targets = $this->getTargetDefinitions()->keys();
+     $def->addAll($targets);
+@@ -357,6 +363,15 @@ final class PerfOptions {
+     $this->srcDir = $this->getNullableString('src-dir');
+ 
+     $this->remoteSiege = $this->getNullableString('remote-siege');
++
++    if (array_key_exists('siege-duration', $o)) {
++      $this->siege_duration = $this->args['siege-duration'];
++    }
++
++    if (array_key_exists('siege-timeout', $o)) {
++      $this->siege_timeout = $this->args['siege-timeout'];
++    }
++
+   }
+ 
+   public function validate() {
+diff --git a/base/Siege.php b/base/Siege.php
+index 5b3fa33..f9cb327 100644
+--- a/base/Siege.php
++++ b/base/Siege.php
+@@ -115,7 +115,7 @@ final class Siege extends Process {
+         // See Siege::getExecutablePath()  - these arguments get passed to
+         // timeout
+         '--signal=9',
+-        '5m',
++        $this->options->siege_timeout,
+         parent::getExecutablePath(),
+       };
+     }
+@@ -177,7 +177,7 @@ final class Siege extends Process {
+ 
+         if (!$this->options->noTimeLimit) {
+           $arguments->add('-t');
+-          $arguments->add(PerfSettings::BenchmarkTime());
++          $arguments->add($this->options->siege_duration);
+         }
+         return $arguments;
+       default:
+-- 
+1.8.3.1
+
