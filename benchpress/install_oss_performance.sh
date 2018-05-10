@@ -61,6 +61,9 @@ rm composer-setup.php
 
 cd ../
 cp -r oss-performance/ "${BENCHPRESS_ROOT}"/benchmarks/
+cp "${TEMPLATES_DIR}/oss-performance/run.sh" \
+   "${BENCHPRESS_ROOT}/benchmarks/oss-performance/"
+chmod u+x "${BENCHPRESS_ROOT}/benchmarks/oss-performance/run.sh"
 
 cd "${BENCHPRESS_ROOT}"/
 rm -rf build/
