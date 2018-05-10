@@ -79,3 +79,11 @@
     - '-d30s'  # Duration
     - '-t32'   # Threads
     - 'http://127.0.0.1:8080/index.html'
+
+- benchmark: oss_performance
+  name: oss_performance
+  description: Default run for oss_performance
+  args:
+    - '-rhhvm'
+    - '-n./benchmarks/nginx/sbin/nginx'
+    - '-s./benchmarks/siege/bin/siege'
