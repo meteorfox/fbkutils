@@ -31,3 +31,8 @@ nginx_wrk_bench:
   path: ./benchmarks/nginx_wrk_bench.sh
   metrics:
     - 'Requests/sec'
+
+oss_performance:
+  parser: json
+  path: ./benchmarks/oss-performance/run.sh
+  metrics: []
