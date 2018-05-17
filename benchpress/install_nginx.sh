@@ -8,7 +8,7 @@ NGINX_DOWNLOAD_URL="http://nginx.org/download/${NGINX_TAR_FILE}"
 
 PCRE_VERSION='pcre-8.41'
 PCRE_TAR_FILE="${PCRE_VERSION}.tar.gz"
-PCRE_DOWNLOAD_URL="ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/${PCRE_TAR_FILE}"
+PCRE_DOWNLOAD_URL="https://downloads.sourceforge.net/project/pcre/pcre/8.41/${PCRE_TAR_FILE}"
 
 ZLIB_VERSION='zlib-1.2.11'
 ZLIB_TAR_FILE="${ZLIB_VERSION}.tar.gz"
