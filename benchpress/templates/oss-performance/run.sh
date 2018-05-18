@@ -51,7 +51,7 @@ function run_benchmark() {
     _db_host="--db-host $4"
   fi
   cd "$( dirname "${BASH_SOURCE[0]}" )"
-  hhvm perf.php \
+  "$_hhvm_path" perf.php \
     --nginx "$_nginx_path" \
     --siege "$_siege_path" \
     --hhvm "$_hhvm_path" \
