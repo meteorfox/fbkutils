@@ -3,13 +3,20 @@ declare -r OLD_CWD="$( pwd )"
 
 function show_help() {
 cat <<EOF
-Usage: ${0##*/} [-h] [-H db host] [-r hhvm path] [-n nginx path] [-s siege path]
+Usage: ${0##*/} [-h] [-H db host] [-r hhvm path] [-n nginx path] [-s siege path] [-- extra_args]
 Proxy shell script to executes oss-performance benchmark
     -h          display this help and exit
     -H          hostname or IP address to mariadb or mysql database
     -n          path to nginx binary (default: 'nginx')
     -r          path to hhvm binary (default: 'hhvm')
     -s          path to siege binary (default: 'siege')
+
+Any other options that oss-performance perf.php script could accept can be
+passed in as extra argunts appending two hyphens '--' followed by the
+arguments. Example:
+
+${0##*/} -- --mediawiki --siege-duration 10M --exec-after-benchmark time
+
 EOF
 }
 
@@ -55,9 +62,8 @@ function run_benchmark() {
     --nginx "$_nginx_path" \
     --siege "$_siege_path" \
     --hhvm "$_hhvm_path" \
-    --mediawiki \
-    --db-username root \
-    --db-password ''
+    ${_db_host} \
+    ${extra_args}
   cd "${OLD_CWD}"
 }
 
@@ -106,6 +112,9 @@ function main() {
   done
   shift "$(($OPTIND -1))"
 
+  # Extra arguments to pass to perf.php
+  extra_args=$@
+
   readonly db_host
   readonly hhvm_path
   readonly nginx_path
@@ -115,7 +124,7 @@ function main() {
     _check_local_db_running || return
     run_benchmark ${hhvm_path} ${nginx_path} ${siege_path}
   else
-    run_benchmark ${hhvm_path} ${nginx_path} ${siege_path} $db_host
+    run_benchmark ${hhvm_path} ${nginx_path} ${siege_path} ${db_host}
   fi
 
   exit 0

@@ -87,3 +87,7 @@
     - '-rhhvm'
     - '-n./benchmarks/nginx/sbin/nginx'
     - '-s./benchmarks/siege/bin/siege'
+    - '--'
+    - '--mediawiki'
+    - '--siege-duration 10M'
+    - '--siege-timeout 11m'
