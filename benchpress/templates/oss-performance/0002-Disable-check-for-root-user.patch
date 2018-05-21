@@ -4,8 +4,9 @@ Date: Wed, 2 May 2018 22:30:16 +0000
 Subject: [PATCH 2/2] Disable check for root user
 
 ---
+ base/HHVMDaemon.php | 4 ++++
  base/SystemChecks.php | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ 2 file changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/base/SystemChecks.php b/base/SystemChecks.php
 index 1ae811f..c81ac6d 100644
@@ -21,6 +22,28 @@ index 1ae811f..c81ac6d 100644
      self::CheckPortAvailability();
      self::CheckCPUFreq();
      self::CheckTCPTimeWaitReuse();
+diff --git a/base/HHVMDaemon.php b/base/HHVMDaemon.php
+index d790ead..33ee5d0 100644
+--- a/base/HHVMDaemon.php
++++ b/base/HHVMDaemon.php
+@@ -26,6 +26,8 @@ final class HHVMDaemon extends PHPEngine {
+          $options->hhvm,
+          '-v',
+          'Eval.Jit=1',
++         '-v',
++         'Server.AllowRunAsRoot=1',
+          __DIR__.'/hhvm_config_check.php',
+        })->map($x ==> escapeshellarg($x)),
+     );
+@@ -101,6 +103,8 @@ final class HHVMDaemon extends PHPEngine {
+       'Log.File='.$this->options->tempDir.'/hhvm_error.log',
+       '-v',
+       'PidFile='.escapeshellarg($this->getPidFilePath()),
++      '-v',
++      'Server.AllowRunAsRoot=1',
+       '-c',
+       OSS_PERFORMANCE_ROOT.'/conf/php.ini',
+     };
 -- 
 1.8.3.1
 
