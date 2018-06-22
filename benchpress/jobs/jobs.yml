@@ -1,5 +1,5 @@
 - benchmark: schbench
-  name: schbench default 
+  name: schbench default
   description: defaults for schbench
   args:
     message-threads: 2
@@ -72,3 +72,23 @@
     scale-factor: 1
     runtime: 1
 
+- benchmark: gapbs_bc
+  name: gapbs_bc
+  description: GAP bc benchmark
+  args:
+    - -u 21
+    - -n 1
+
+- benchmark: gapbs_bfs
+  name: gapbs_bfs
+  description: GAP bfs benchmark
+  args:
+    - -u 21
+    - -n 1
+
+- benchmark: gapbs_tc
+  name: gapbs_tc
+  description: GAP tc benchmark
+  args:
+    - -u 21
+    - -n 1
