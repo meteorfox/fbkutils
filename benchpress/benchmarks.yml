@@ -26,3 +26,29 @@ silo:
     - latency:
         - avg_latency
 
+gapbs_bc:
+  parser: gapbs
+  path: ./benchmarks/gapbs/bc
+  metrics:
+    - generate_time
+    - build_time
+    - trial_time
+    - average_time
+
+gapbs_bfs:
+  parser: gapbs
+  path: ./benchmarks/gapbs/bfs
+  metrics:
+    - generate_time
+    - build_time
+    - trial_time
+    - average_time
+
+gapbs_tc:
+  parser: gapbs
+  path: ./benchmarks/gapbs/tc
+  metrics:
+    - generate_time
+    - build_time
+    - trial_time
+    - average_time
