@@ -128,3 +128,24 @@
     - '-m benchmarks/minebench/datasets/rsearch/matrices/RIBOSUM85-60.mat'
     - 'benchmarks/minebench/datasets/rsearch/Queries/mir-40.stk'
     - 'benchmarks/minebench/datasets/rsearch/Databasefile/100Kdb.fa'
+
+- benchmark: gapbs_bc
+  name: gapbs_bc
+  description: GAP bc benchmark
+  args:
+    - -u 21
+    - -n 1
+
+- benchmark: gapbs_bfs
+  name: gapbs_bfs
+  description: GAP bfs benchmark
+  args:
+    - -u 21
+    - -n 1
+
+- benchmark: gapbs_tc
+  name: gapbs_tc
+  description: GAP tc benchmark
+  args:
+    - -u 21
+    - -n 1
