@@ -36,6 +36,7 @@ oss_performance:
   parser: json
   path: ./benchmarks/oss-performance/run.sh
   metrics: []
+
 minebench_kmeans:
   parser: minebench_kmeans
   path: ./benchmarks/minebench/time_wrap.sh
@@ -85,3 +86,10 @@ gapbs_tc:
     - build_time
     - trial_time
     - average_time
+
+graph500_omp_csr:
+  parser: graph500
+  path: ./benchmarks/graph500/omp-csr
+  metrics:
+    - harmonic_mean_TEPS
+    - harmonic_stddev_TEPS

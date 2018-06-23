@@ -149,3 +149,9 @@
   args:
     - -u 21
     - -n 1
+
+- benchmark: graph500_omp_csr
+  name: graph500_omp_csr
+  description: Graph500 OpenMP Compressed-Sparse-Row
+  args:
+    - -s 20

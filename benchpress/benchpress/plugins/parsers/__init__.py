@@ -9,6 +9,7 @@
 from .fio import FioParser
 from .gapbs import GAPBSParser
 from .generic import JSONParser
+from .graph500 import Graph500Parser
 from .ltp import LtpParser
 from .nginx_wrk_bench import NginxWrkParser
 from .minebench import KMeansParser
@@ -22,6 +23,7 @@ from .silo import SiloParser
 def register_parsers(factory):
     factory.register('fio', FioParser)
     factory.register('gapbs', GAPBSParser)
+    factory.register('graph500', Graph500Parser)
     factory.register('json', JSONParser)
     factory.register('ltp', LtpParser)
     factory.register('nginx_wrk_bench', NginxWrkParser)
