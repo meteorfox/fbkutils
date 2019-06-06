@@ -13,11 +13,10 @@ import sys
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
-
 def issue_background_command(cmd, stdout_path, stderr_path, env=None):
     stdout = open(stdout_path, 'w', encoding='utf-8')
     stderr = open(stderr_path, 'w', encoding='utf-8')
-    subprocess.Popen(
+    proc = subprocess.Popen(
         cmd,
         shell=False,
         env=env,
@@ -25,3 +24,7 @@ def issue_background_command(cmd, stdout_path, stderr_path, env=None):
         stderr=stderr,
         close_fds=True
     )
+    return proc
+
+def kill_process(proc):
+    proc.terminate()

@@ -1,0 +1,30 @@
+diff --git a/conf/nginx/nginx.conf.in b/conf/nginx/nginx.conf.in
+index bef47ca..5e80162 100644
+--- a/conf/nginx/nginx.conf.in
++++ b/conf/nginx/nginx.conf.in
+@@ -8,7 +8,7 @@
+ #
+ # This file was created on: __DATE__
+
+-worker_processes  5;
++worker_processes  auto;
+ error_log __NGINX_TEMP_DIR__/nginx-error.log;
+ pid __NGINX_PID_FILE__;
+
+diff --git a/targets/mediawiki/Memcached.php b/targets/mediawiki/Memcached.php
+index ad4a56d..677ec5e 100644
+--- a/targets/mediawiki/Memcached.php
++++ b/targets/mediawiki/Memcached.php
+@@ -6,3 +6,12 @@ $wgMemCachedServers = array( "__MEMCACHED_HOST__:__MEMCACHED_PORT__" );
+ $wgSessionCacheType = CACHE_MEMCACHED;
+ # Turn this option back on if we use memcached
+ $wgUseDatabaseMessages = true;
++
++$wgSessionsInObjectCache = true; # optional
++$wgParserCacheType = CACHE_MEMCACHED; # optional
++$wgMessageCacheType = CACHE_MEMCACHED; # optional
++$wgLanguageConverterCacheType = CACHE_MEMCACHED;
++$wgEnableSidebarCache = true;
++$wgMiserMode = true;
++$wgDisableCounter = true;
++
