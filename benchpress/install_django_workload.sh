@@ -6,7 +6,8 @@ HTTP_PROXY="fwdproxy:8080"
 HTTPS_PROXY="fwdproxy:8080"
 
 # 1. Clone Django workload repo
-git -c http.proxy=$HTTP_PROXY -c https.proxy=$HTTPS_PROXY clone https://github.com/Instagram/django-workload
+yum install -y git
+git -c http.proxy=$HTTP_PROXY -c https.proxy=$HTTPS_PROXY clone https://github.com/Instagram/django-workload # Assumes git is installed
 
 # 2. Install JDK
 yum install -y fb-jdk-8.72
@@ -23,33 +24,42 @@ update-alternatives --install /usr/bin/keytool keytool /usr/local/fb-jdk-8.72/bi
 update-alternatives --set keytool /usr/local/fb-jdk-8.72/bin/keytool
 
 # 4. Install Cassandra
-yum install -y apache-cassandra
-cp "$TEMPLATES_DIR/cassandra" "/etc/default/cassandra" || exit
-mv /etc/cassandra/conf/jvm-server.options /etc/cassandra/conf/jvm-server.options.bkp
-cp "$TEMPLATES_DIR/jvm-server.options" "/etc/cassandra/conf/jvm-server.options" || exit
+
+# 1) wget new cassandra pkg
+# 2) unpack
+# 3) cd into django-workload/apache-cassandra-3.11.4/conf
+# 4) modify cassandra.yaml and jvm.options (cmd remains same except for destination of cp)
+# 5) create data directories and apply permisions (cmd remains same)
+# 6) cd .. && bin/cassandra -R -p cassandra.pid (starts cassandra)
+# 7) cd django-workload/django-workload && source venv/bin/activate && DJANGO_SETTINGS_MODULE=cluster_settings django-admin setup
+
+# To kill cassandra server at end:
+# 1) cd into django-workload/apache-cassandra-3.11.4
+# 2) kill `cat cassandra.pid`
+# pgrep java to ensure that it's no longer running
+
+# Download Cassandra from third-party source
+https_proxy=$HTTPS_PROXY http_proxy=$HTTP_PROXY wget https://www-us.apache.org/dist/cassandra/3.11.4/apache-cassandra-3.11.4-bin.tar.gz
+tar -xzvf apache-cassandra-3.11.4-bin.tar.gz
+cd apache-cassandra-3.11.4 || exit
+mv conf/jvm.options conf/jvm.options.bkp || exit
+cp "${TEMPLATES_DIR}/jvm.options" "${BENCHPRESS_ROOT}/apache-cassandra-3.11.4/conf/jvm.options" || exit
 # Create data directories to use in configuring Cassandra
 mkdir -p /data/cassandra/{commitlog,data,saved_caches,hints}/
 chmod -R 0700 /data/cassandra
-chown -R cassandra:cassandra /data/cassandra
 # Configure and start Cassandra
-cp "$TEMPLATES_DIR/cassandra.yaml" "/etc/cassandra/conf/cassandra.yaml" || exit
-systemctl daemon-reload
-systemctl stop cassandra
-systemctl start cassandra
+cp "${TEMPLATES_DIR}/cassandra.yaml" "${BENCHPRESS_ROOT}/apache-cassandra-3.11.4/conf/cassandra.yaml" || exit
+bin/cassandra -R -p cassandra.pid 2>&1 > cassandra.log
 
 # 5. Install Django and its dependencies
 cd "${BENCHPRESS_ROOT}/django-workload/django-workload" || exit
-yum install -y memcached libmemecached-devel zlib-devel
-# FB does not have RPMs with Python 3.5+, pip, virtualenv, so download remotely
-export https_proxy=$HTTPS_PROXY
-yum -y install https://centos7.iuscommunity.org/ius-release.rpm
-export http_proxy=$HTTP_PROXY
-yum -y install python36u python36u-pip python36u-devel
+yum install -y memcached libmemcached-devel zlib-devel
+yum install -y python36 python36-devel python36-numpy
 # Activate virtual env to run Python 3.6
 python3.6 -m venv venv
 # shellcheck source=venv/bin/activate
-source venv/bin/activate # source /root/virtualenvs/benchpress_venv/bin/activate
-pip install -r requirements.txt
+source venv/bin/activate
+https_proxy=$HTTPS_PROXY http_proxy=$HTTP_PROXY pip install -r requirements.txt
 # Configure Django and uWSGI
 cp cluster_settings_template.py cluster_settings.py || exit
 cp "${TEMPLATES_DIR}/cluster_settings.py" "${BENCHPRESS_ROOT}/django-workload/django-workload/cluster_settings.py" || exit
@@ -58,22 +68,17 @@ cp "${TEMPLATES_DIR}/uwsgi.ini" "${BENCHPRESS_ROOT}/django-workload/django-workl
 cd "${BENCHPRESS_ROOT}/django-workload/services/memcached/" || exit
 ./run-memcached &
 cd "${BENCHPRESS_ROOT}/django-workload/django-workload/django_workload" || exit
-git -c http.proxy=$HTTP_PROXY -c https.proxy=$HTTPS_PROXY apply templates/django-workload/0002-Memcache-Tuning.patch
-# TODO: Do I include below 4 commands?
-service cassandra start # Need to start cassandra before loading data from Django into it!
+git -c http.proxy=$HTTP_PROXY -c https.proxy=$HTTPS_PROXY apply "${TEMPLATES_DIR}/0002-Memcache-Tuning.patch"
 DJANGO_SETTINGS_MODULE=cluster_settings django-admin setup
 cd "${BENCHPRESS_ROOT}/django-workload/django-workload" || exit
 uwsgi uwsgi.ini &
+deactivate
 # Run Siege load generator (FAILS if Siege is not already installed from install_oss_performance_mediawiki.sh)
-unset http_proxy
-unset https_proxy
-yum install -y python34
-yum install -y python34-numpy
-
-: '
 # 6. Run Django workload benchmark
-# source /root/virtualenvs/benchpress_venv/bin/activate
-cd ~/django-workload/client || exit
+cd "${BENCHPRESS_ROOT}/django-workload/client" || exit
 ./gen-urls-file
 WORKERS=144 DURATION=2M LOG=./siege.log SOURCE=urls.txt ./run-siege # TODO: Have these env vars customizable
-'
+# Kill Cassandra process (cleanup)
+cd "${BENCHPRESS_ROOT}/apache-cassandra-3.11.4"
+kill `cat cassandra.pid`
+# TODO: Kill memcache and uwsgi (do some cleanup)

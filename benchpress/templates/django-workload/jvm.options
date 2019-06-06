@@ -1,7 +1,8 @@
 Note: Make sure -Djava.net.preferIPv4Stack=true is not set or is set to false. Otherwise Cassandra won't bind to the IPv6 address
--Xms65536M
--Xmx65536M
--Xmn16384M
+
+-Xms16G
+-Xmx16G
+-Xmn4G
 
 -XX:+HeapDumpOnOutOfMemoryError
 -Xss256k
@@ -34,4 +35,3 @@ Note: Make sure -Djava.net.preferIPv4Stack=true is not set or is set to false. O
 -XX:+AlwaysPreTouch
 -XX:+UnlockDiagnosticVMOptions
 -XX:ParGCCardsPerStrideChunk=4096
-
