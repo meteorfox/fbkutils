@@ -6,6 +6,7 @@
 # LICENSE file in the root directory of this source tree. An additional grant
 # of patent rights can be found in the PATENTS file in the same directory.
 
+from .django_workload import DjangoWorkloadParser
 from .fio import FioParser
 from .gapbs import GAPBSParser
 from .generic import JSONParser
@@ -21,6 +22,7 @@ from .silo import SiloParser
 
 
 def register_parsers(factory):
+    factory.register('django_workload', DjangoWorkloadParser)
     factory.register('fio', FioParser)
     factory.register('gapbs', GAPBSParser)
     factory.register('graph500', Graph500Parser)
